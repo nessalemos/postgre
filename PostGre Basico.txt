@@ -1,0 +1,37 @@
+create table diretor(
+id_diretor int not null,
+nome_diretor varchar(50),
+PRIMARY KEY (id_diretor)
+);
+
+SELECT *
+FROM DIRETOR;
+create table filme(
+id_filme int not null,
+nome_filme varchar(50),
+id_diretor int not null,
+id_produtora int not null,
+genero varchar(25),
+primary key(id_filme),
+foreign key (id_diretor) references diretor(id_diretor)
+);
+
+select * from filme;
+
+create table produtora(
+id_produtora int not null,
+nome_produtora varchar(25),
+PRIMARY KEY (id_produtora)
+);
+
+select * from produtora;
+
+alter table filme add constraint fk_id_produtora foreign key (id_produtora) references produtora(id_produtora);
+
+insert into diretor values (1,'Steven Spielberg'),(2,'James Cameron'), (3,'Quentin Tarantino');
+
+insert into produtora values (1,'20th Century Studios'),(2,'Sony Pictures'), (3,'Paramount Pictures');
+
+insert into filme values (1,'Django',3,2,'Faroeste'),(2,'Avatar',2,1,'Ficção Científica'), (3,'O resgate do Soldado Ryan',1,3,'Guerra');
+
+select * from diretor inner join filme on filme.id_diretor = diretor.id_diretor;
